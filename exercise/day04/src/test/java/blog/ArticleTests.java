@@ -1,71 +1,69 @@
 package blog;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+@DisplayName("Testing Article")
 class ArticleTests {
-    @Test
-    void it_should_add_valid_comment() throws CommentAlreadyExistException {
-        var article = new Article(
-                "Lorem Ipsum",
-                "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-        );
 
-        article.addComment("Amazing article !!!", "Pablo Escobar");
-    }
+    @Nested
+    class Given_an_article {
 
-    @Test
-    void it_should_add_a_comment_with_the_given_text() throws CommentAlreadyExistException {
-        var article = new Article(
-                "Lorem Ipsum",
-                "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-        );
+        private Article article;
 
-        var text = "Amazing article !!!";
-        article.addComment(text, "Pablo Escobar");
+        @BeforeEach
+        void setUp() {
+            // avoid repeating the same code so create instance of article in a @BeforeEach method
+            article = new Article(
+                    "Lorem Ipsum",
+                    "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+            );
+        }
 
-        assertThat(article.getComments())
-                .hasSize(1)
-                .anyMatch(comment -> comment.text().equals(text));
-    }
+        @Nested
+        class Adding_comment_with_text_and_author {
 
-    @Test
-    void it_should_add_a_comment_with_the_given_author() throws CommentAlreadyExistException {
-        var article = new Article(
-                "Lorem Ipsum",
-                "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-        );
+            private String text;
+            private String author;
 
-        var author = "Pablo Escobar";
-        article.addComment("Amazing article !!!", author);
+            @BeforeEach
+            void setUp() throws CommentAlreadyExistException {
+                // create a second nested class to add comment to article
+                text = "Amazing article !!!";
+                author = "Pablo Escobar";
+                article.addComment(text, author);
+            }
 
-        assertThat(article.getComments())
-                .hasSize(1)
-                .anyMatch(comment -> comment.author().equals(author));
-    }
+            @Test
+            void should_contains_a_comment_with_the_given_text() {
+                // simplify the test by checking only text of the comment
+                assertThat(article.getComments())
+                        .hasSize(1)
+                        .anyMatch(comment -> comment.text().equals(text));
+            }
 
-    @Test
-    void it_should_add_a_comment_with_the_date_of_the_day() throws CommentAlreadyExistException {
-        var article = new Article(
-                "Lorem Ipsum",
-                "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-        );
+            @Test
+            void should_contains_a_comment_with_the_given_author() {
+                // simplify the test by checking only author of the comment
+                assertThat(article.getComments())
+                        .hasSize(1)
+                        .anyMatch(comment -> comment.author().equals(author));
+            }
 
-        article.addComment("Amazing article !!!", "Pablo Escobar");
-    }
-
-    @Test
-    void it_should_throw_an_exception_when_adding_existing_comment() throws CommentAlreadyExistException {
-        var article = new Article(
-                "Lorem Ipsum",
-                "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-        );
-        article.addComment("Amazing article !!!", "Pablo Escobar");
-
-        assertThatThrownBy(() -> {
-            article.addComment("Amazing article !!!", "Pablo Escobar");
-        }).isInstanceOf(CommentAlreadyExistException.class);
+            @Test
+            void should_throw_an_exception_when_adding_existing_comment() {
+                assertThatThrownBy(() -> article.addComment(text, author))
+                        .isInstanceOf(CommentAlreadyExistException.class);
+            }
+        }
+        // remove test with the check of the date of the day; it's useless
     }
 }
