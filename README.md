@@ -1,3 +1,5 @@
+[![Contributors](https://github.com/advent-of-craft/advent-of-craft/actions/workflows/contributors.yml/badge.svg)](https://github.com/advent-of-craft/advent-of-craft/actions/workflows/contributors.yml)
+
 # Advent Of Craft
 
 Christmas is here!
@@ -34,7 +36,7 @@ To facilitate the communication around challenges you can join us on `Discord` b
 ![Discord Advent Of Craft](img/discord.png)
 
 ## Instructions
-[Here are the instructions for the journey](d-1_instructions_post.md)
+[Here are the instructions for the journey](INSTRUCTIONS.md)
 
 ## Challenges - 2023
 Here are the different challenges :
@@ -43,6 +45,15 @@ Here are the different challenges :
 - [Day 2: One level of indentation.](exercise/day02/docs/challenge.md)
 - [Day 3: One dot per line.](exercise/day03/docs/challenge.md)
 - [Day 4: Identify the behavior under test and rewrite the tests.](exercise/day04/docs/challenge.md)
+- [Day 5: No "for" loop authorized.](exercise/day05/docs/challenge.md)
+- [Day 6: Parameterize your tests.](exercise/day06/docs/challenge.md)
+- [Day 7: Simplify the run method by extracting the right behavior.](exercise/day07/docs/challenge.md)
+- [Day 8: Using TDD rules, write a password validation program.](exercise/day08/docs/challenge.md)
+- [Day 9: Fix the code.](exercise/day09/docs/challenge.md)
+- [Day 10: Dot not use "if" statement.](exercise/day10/docs/challenge.md)
+- [Day 11: Gather a dependency freshness metric.](exercise/day11/docs/challenge.md)
+- [Day 12: Make your code open for extension.](exercise/day12/docs/challenge.md)
+- [Day 13: Find a way to eliminate the irrelevant, and amplify the essentials of those tests.](exercise/day13/docs/challenge.md)
 
 ### Solutions
 A solution proposal will be published here every day during the `Advent Of Craft` containing `the code` and a `step by step` guide.
@@ -50,3 +61,34 @@ A solution proposal will be published here every day during the `Advent Of Craft
 - [Day 1: Make your production code easier to understand.](solution/day01/docs/step-by-step.md)
 - [Day 2: One level of indentation.](solution/day02/docs/step-by-step.md)
 - [Day 3: One dot per line.](solution/day03/docs/step-by-step.md)
+- [Day 4: Identify the behavior under test and rewrite the tests.](solution/day04/docs/step-by-step.md)
+- [Day 5: No "for" loop authorized.](solution/day05/docs/step-by-step.md)
+- [Day 6: Parameterize your tests.](solution/day06/docs/step-by-step.md)
+- [Day 7: Simplify the run method by extracting the right behavior.](solution/day07/docs/step-by-step.md)
+- [Day 8: Using TDD rules, write a password validation program.](solution/day08/docs/step-by-step.md)
+- [Day 9: Fix the code.](solution/day09/docs/step-by-step.md)
+- [Day 10: Dot not use "if" statement.](solution/day10/docs/step-by-step.md)
+- [Day 11: Gather a dependency freshness metric.](solution/day11/docs/step-by-step.md)
+- [Day 12: Make your code open for extension.](solution/day12/docs/step-by-step.md)
+
+ 
+## Contributors
+
+<table>
+<tr>
+    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
+        <a href=https://github.com/ythirion>
+            <img src=https://avatars.githubusercontent.com/u/20967693?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Yoan Thirion/>
+            <br />
+            <sub style="font-size:14px"><b>Yoan Thirion</b></sub>
+        </a>
+    </td>
+    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
+        <a href=https://github.com/yanncourtel>
+            <img src=https://avatars.githubusercontent.com/u/75068587?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Yann Courtel/>
+            <br />
+            <sub style="font-size:14px"><b>Yann Courtel</b></sub>
+        </a>
+    </td>
+</tr>
+</table>

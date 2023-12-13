@@ -13,6 +13,15 @@
 		<module>day02</module>
 		<module>day03</module>
 		<module>day04</module>
+		<module>day05</module>
+		<module>day06</module>
+		<module>day07</module>
+		<module>day08</module>
+		<module>day09</module>
+		<module>day10</module>
+		<module>day11</module>
+		<module>day12</module>
+		<module>day13</module>
     </modules>
 
     <properties>
