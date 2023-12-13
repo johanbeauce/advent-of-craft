@@ -25,6 +25,14 @@ public class Project {
         return buildsSuccessfully ? "success" : "failure";
     }
 
+    public boolean isDeploySuccessFully() {
+        return "success".equals(deploy());
+    }
+
+    public boolean isRunTestsSuccessFully() {
+        return "success".equals(runTests());
+    }
+
     public static class ProjectBuilder {
         private boolean buildsSuccessfully;
         private TestStatus testStatus;
