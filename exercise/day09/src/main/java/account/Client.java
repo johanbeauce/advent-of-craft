@@ -9,6 +9,9 @@ public class Client {
 
     public Client(Map<String, Double> orderLines) {
         this.orderLines = orderLines;
+        this.totalAmount = orderLines.values().stream()
+                .mapToDouble(Double::doubleValue)
+                .sum();
     }
 
     public String toStatement() {
@@ -19,7 +22,6 @@ public class Client {
     }
 
     private String formatLine(String name, Double value) {
-        totalAmount += value;
         return name + " for " + value + "€";
     }
 
