@@ -1,5 +1,6 @@
 package blog;
 
+import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -14,47 +15,56 @@ class ArticleTests {
 
     @BeforeEach
     void setup() {
-        article = new Article(
-                "Lorem Ipsum",
-                "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-        );
-    }
-
-    @Test
-    void should_add_comment_in_an_article() throws CommentAlreadyExistException {
-        article.addComment(COMMENT_TEXT, AUTHOR);
-
-        assertThat(article.getComments()).hasSize(1);
-
-        var comment = article.getComments().get(0);
-        assertThat(comment.text()).isEqualTo(COMMENT_TEXT);
-        assertThat(comment.author()).isEqualTo(AUTHOR);
-    }
-
-    @Test
-    void should_add_comment_in_an_article_containing_already_a_comment() throws CommentAlreadyExistException {
-        var newComment = "Finibus Bonorum et Malorum";
-        var newAuthor = "Al Capone";
-
-        article.addComment(COMMENT_TEXT, AUTHOR);
-        article.addComment(newComment, newAuthor);
-
-        assertThat(article.getComments()).hasSize(2);
-
-        var lastComment = article.getComments().getLast();
-        assertThat(lastComment.text()).isEqualTo(newComment);
-        assertThat(lastComment.author()).isEqualTo(newAuthor);
+        article = ArticleBuilder.anArticle()
+                .withName("Lorem Ipsum")
+                .withContent("consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore")
+                .build();
     }
 
     @Nested
-    class Fail {
+    class Given_an_article_without_comment {
         @Test
-        void when_adding_an_existing_comment() throws CommentAlreadyExistException {
-            article.addComment(COMMENT_TEXT, AUTHOR);
+        void should_have_no_comment() {
+            assertThat(article.getComments()).isEmpty();
+        }
+    }
 
-            assertThatThrownBy(() -> {
-                article.addComment(COMMENT_TEXT, AUTHOR);
-            }).isInstanceOf(CommentAlreadyExistException.class);
+    @Nested
+    class Given_an_article_with_a_comment {
+        @BeforeEach
+        void setup() throws CommentAlreadyExistException {
+            article.addComment(COMMENT_TEXT, AUTHOR);
+        }
+
+        @Test
+        void should_add_comment_in_an_article() {
+            assertThat(article.getComments())
+                    .hasSize(1)
+                    .extracting(Comment::text, Comment::author)
+                    .containsExactly(Tuple.tuple(COMMENT_TEXT, AUTHOR));
+        }
+
+        @Test
+        void should_add_comment_in_an_article_containing_already_a_comment() throws CommentAlreadyExistException {
+            var newComment = "Finibus Bonorum et Malorum";
+            var newAuthor = "Al Capone";
+
+            article.addComment(newComment, newAuthor);
+
+            assertThat(article.getComments())
+                    .hasSize(2)
+                    .element(1)
+                    .extracting(Comment::text, Comment::author)
+                    .containsExactly(newComment, newAuthor);
+        }
+
+        @Nested
+        class Fail {
+            @Test
+            void when_adding_an_existing_comment() {
+                assertThatThrownBy(() -> article.addComment(COMMENT_TEXT, AUTHOR))
+                        .isInstanceOf(CommentAlreadyExistException.class);
+            }
         }
     }
 }
