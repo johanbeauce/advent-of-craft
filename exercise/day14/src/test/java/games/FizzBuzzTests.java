@@ -40,13 +40,13 @@ class FizzBuzzTests {
     @MethodSource("validInputs")
     void returns_number_representation(int input, String expectedResult) throws OutOfRangeException {
         assertThat(FizzBuzz.convert(input))
-                .isEqualTo(expectedResult);
+                .contains(expectedResult);
     }
 
     @ParameterizedTest
     @MethodSource("invalidInputs")
     void throws_an_exception_for_numbers_out_of_range(int input) {
-        assertThatThrownBy(() -> FizzBuzz.convert(input))
+        assertThatThrownBy(() -> FizzBuzz.convert(input).orElseThrow(OutOfRangeException::new))
                 .isInstanceOf(OutOfRangeException.class);
     }
 }

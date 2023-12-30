@@ -2,6 +2,7 @@ package games;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class FizzBuzz {
@@ -28,11 +29,11 @@ public class FizzBuzz {
         return input <= MIN || input > MAX;
     }
 
-    public static String convert(Integer input) throws OutOfRangeException {
+    public static Optional<String> convert(Integer input) {
         if (isOutOfRange(input)) {
-            throw new OutOfRangeException();
+            return Optional.empty();
         }
-        return convertSafely(input);
+        return Optional.of(convertSafely(input));
     }
 
     private static String convertSafely(Integer input) {
